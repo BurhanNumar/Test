@@ -1,0 +1,103 @@
+1.App.js (Ana bileşen ve işlevlerin yönetildiği yer):
+
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+function Ilan({ ilanId, baslik, icerik, bitisTarihi, yayindaMi, ilanYayinaAl, ilanYayindanKaldir }) {
+  return (
+    <div className="ilan">
+      <h2>{baslik}</h2>
+      <p>{icerik}</p>
+      {yayindaMi ? (
+        <button onClick={() => ilanYayindanKaldir(ilanId)}>Yayından Kaldır</button>
+      ) : (
+        <button onClick={() => ilanYayinaAl(ilanId)}>Yayına Al</button>
+      )}
+    </div>
+  );
+}
+
+function App() {
+  // Örnek ilanlar
+  const [ilanlar, setIlanlar] = useState([
+    { id: 1, baslik: 'İlan 1 Başlığı', icerik: 'İlan 1 içeriği burada yer alır.', bitisTarihi: '2024-06-30', yayindaMi: true },
+    { id: 2, baslik: 'İlan 2 Başlığı', icerik: 'İlan 2 içeriği burada yer alır.', bitisTarihi: '2024-07-15', yayindaMi: true },
+  ]);
+
+  // İlan yayına alma işlevi
+  const ilanYayinaAl = (ilanId) => {
+    setIlanlar(ilanlar.map(ilan => {
+      if (ilan.id === ilanId) {
+        return { ...ilan, yayindaMi: true };
+      }
+      return ilan;
+    }));
+  };
+
+  // İlan yayından kaldırma işlevi
+  const ilanYayindanKaldir = (ilanId) => {
+    setIlanlar(ilanlar.map(ilan => {
+      if (ilan.id === ilanId) {
+        return { ...ilan, yayindaMi: false };
+      }
+      return ilan;
+    }));
+  };
+
+  // İlan süre kontrolü ve otomatik yayından kaldırma
+  useEffect(() => {
+    ilanlar.forEach(ilan => {
+      const simdikiTarih = new Date();
+      const ilanBitisTarihi = new Date(ilan.bitisTarihi);
+      if (simdikiTarih > ilanBitisTarihi && ilan.yayindaMi) {
+        ilanYayindanKaldir(ilan.id);
+      }
+    });
+  }, [ilanlar]);
+
+  return (
+    <div className="App">
+      <h1>İlan Yönetimi</h1>
+      {ilanlar.map(ilan => (
+        <Ilan
+          key={ilan.id}
+          ilanId={ilan.id}
+          baslik={ilan.baslik}
+          icerik={ilan.icerik}
+          bitisTarihi={ilan.bitisTarihi}
+          yayindaMi={ilan.yayindaMi}
+          ilanYayinaAl={ilanYayinaAl}
+          ilanYayindanKaldir={ilanYayindanKaldir}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+2.App.css (Basit bir CSS dosyası, stil tanımlamaları için):
+
+.App {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ilan {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.ilan button {
+  margin-top: 5px;
+}
+
+Bu örnekte, App.js dosyasında App bileşeni ana bileşen olarak tanımlanmıştır.
+Ilan bileşeni ise her bir ilanı temsil eder ve ilanların detayları, yayında olup
+olmadığı ve ilgili butonlar bu bileşen içinde gösterilir. useEffect hook'u kullanılarak
+ilanların süresi kontrol edilir ve süresi geçen ilanlar otomatik olarak yayından kaldırılır.
+
+Bu şekilde, React.js kullanarak dinamik bir ilan yönetimi uygulaması oluşturabilirsiniz.
+Her bir ilanın detayları, yayına alma ve kaldırma işlevleri, süre kontrolü gibi işlemler
+yönetim panelinde veya kullanıcı arayüzünde etkileşimli olarak gerçekleştirilebilir.
