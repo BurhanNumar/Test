@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İlan Yönetimi</title>
+<script>
+  // JavaScript fonksiyonlarını buraya ekleyeceğiz
+  // İlan yayına alma fonksiyonu
+  function ilanYayinaAl(ilanId) {
+    console.log(`İlan ${ilanId} yayına alındı.`);
+    // Burada ilanın yayına alınması için gerekli işlemleri yapabilirsiniz
+    // Örneğin, ilan div'ini görünür yapabilirsiniz
+    document.getElementById(`ilan${ilanId}`).style.display = "block";
+  }
+
+  // İlan yayından kaldırma fonksiyonu
+  function ilanYayindanKaldir(ilanId) {
+    console.log(`İlan ${ilanId} yayından kaldırıldı.`);
+    // Burada ilanın yayından kaldırılması için gerekli işlemleri yapabilirsiniz
+    // Örneğin, ilan div'ini gizleyebilirsiniz
+    document.getElementById(`ilan${ilanId}`).style.display = "none";
+  }
+
+  // İlan süresini kontrol ederek otomatik yayından kaldırma
+  function ilanSuresiKontrolEt(ilanId, bitisTarihi) {
+    const simdikiTarih = new Date();
+    const ilanBitisTarihi = new Date(bitisTarihi);
+
+    if (simdikiTarih > ilanBitisTarihi) {
+      ilanYayindanKaldir(ilanId);
+    }
+  }
+</script>
+</head>
+<body>
+  <h1>İlan Yönetimi</h1>
+
+  <!-- Örnek ilan div'leri -->
+  <div id="ilan1">
+    <h2>İlan 1 Başlığı</h2>
+    <p>İlan 1 içeriği burada yer alır.</p>
+    <button onclick="ilanYayinaAl(1)">Yayına Al</button>
+    <button onclick="ilanYayindanKaldir(1)">Yayından Kaldır</button>
+  </div>
+
+  <div id="ilan2">
+    <h2>İlan 2 Başlığı</h2>
+    <p>İlan 2 içeriği burada yer alır.</p>
+    <button onclick="ilanYayinaAl(2)">Yayına Al</button>
+    <button onclick="ilanYayindanKaldir(2)">Yayından Kaldır</button>
+  </div>
+
+  <script>
+    // Örnek kullanım
+    const bitisTarihi1 = '2024-06-30';
+    ilanSuresiKontrolEt(1, bitisTarihi1);
+
+    const bitisTarihi2 = '2024-07-15';
+    ilanSuresiKontrolEt(2, bitisTarihi2);
+  </script>
+</body>
+</html>
+
+Bu HTML sayfasında, her bir ilan için bir <div> elementi bulunmaktadır.
+Her ilanın kendine özgü bir ID'si vardır (ilan1, ilan2, vb.).
+Bu div'ler ilanların detaylarını ve ilgili butonları (Yayına Al ve Yayından Kaldır) içermektedir.
+
+JavaScript kısmında tanımlanan fonksiyonlar, bu butonların tıklanmasıyla ilanların yayına alınmasını veya yayından kaldırılmasını sağlar.
+Ayrıca, ilanSuresiKontrolEt fonksiyonu da belirtilen tarihlerde ilanların otomatik olarak yayından kaldırılmasını sağlar.
+
+
+
+Bu örnekteki JavaScript kodları sayesinde, ilan yönetimini basit bir şekilde gerçekleştirebilir ve kullanıcı etkileşimleriyle ilanların durumunu kontrol edebilirsiniz. Gerçek uygulamada daha kapsamlı veri yönetimi ve güvenlik önlemleri de eklenmelidir.
