@@ -1,0 +1,46 @@
+// İlanın yayına alınması
+function ilanYayinaAl(ilanId) {
+    // İlanın yayına alındığını işaretlemek için ilgili işlemleri yapabilirsiniz
+    console.log(`İlan ${ilanId} yayına alındı.`);
+    // İlanı yayına aldıktan sonra ilgili görselleri ve bilgileri yayınlamak için gerekli işlemleri gerçekleştirin
+}
+
+// İlanın yayından kaldırılması
+function ilanYayindanKaldir(ilanId) {
+    // İlanın yayından kaldırıldığını işaretlemek için ilgili işlemleri yapabilirsiniz
+    console.log(`İlan ${ilanId} yayından kaldırıldı.`);
+    // İlanı yayından kaldırdıktan sonra ilgili görselleri ve bilgileri kaldırmak için gerekli işlemleri gerçekleştirin
+}
+
+2.İlan Süresi Kontrolü ve Otomatik Kaldırma:
+// İlan süresini kontrol ederek otomatik olarak yayından kaldırma
+function ilanSuresiKontrolEt(ilanId, bitisTarihi) {
+    // Şu anki tarihi al
+    const simdikiTarih = new Date();
+    const ilanBitisTarihi = new Date(bitisTarihi);
+
+    // Eğer ilanın bitiş tarihi geçmişse, ilanı yayından kaldır
+    if (simdikiTarih > ilanBitisTarihi) {
+        ilanYayindanKaldir(ilanId);
+    }
+}
+
+3. Kullanım Örneğği
+// Örnek kullanım
+const ilanId = 1;
+const bitisTarihi = '2024-06-30'; // Örnek bir bitiş tarihi
+
+ilanYayinaAl(ilanId); // İlanı yayına al
+
+// İlan süresini kontrol edip otomatik olarak yayından kaldır
+ilanSuresiKontrolEt(ilanId, bitisTarihi);
+
+Bu örnekte, ilanId ve bitisTarihi gibi değişkenlerle ilgili ilanın bilgilerini tutuyoruz.
+  ilanYayinaAl ile ilanı yayına alıyoruz ve ilanSuresiKontrolEt fonksiyonu ile ilanın süresini
+  kontrol ederek gerektiğinde otomatik olarak yayından kaldırıyoruz.
+
+Bu örnekler genel işleyişi göstermektedir. 
+  Gerçek bir uygulama için kullanılacak metodlar ve işlemler,
+  ilan sitenizin özelliklerine, veri tabanı yapısına ve güvenlik gereksinimlerine göre değişiklik gösterebilir.
+
+  
