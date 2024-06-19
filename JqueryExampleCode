@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jQuery ile İki Sayının Çarpımı</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<label for="sayi1">Birinci Sayı:</label>
+<input type="number" id="sayi1">
+<br><br>
+<label for="sayi2">İkinci Sayı:</label>
+<input type="number" id="sayi2">
+<br><br>
+<button id="hesapla">Çarp</button>
+<br><br>
+<span id="sonuc"></span>
+
+<script>
+    $(document).ready(function() {
+        $('#hesapla').click(function() {
+            var sayi1 = parseInt($('#sayi1').val());
+            var sayi2 = parseInt($('#sayi2').val());
+
+            if (!isNaN(sayi1) && !isNaN(sayi2)) {
+                var carpim = sayi1 * sayi2;
+                $('#sonuc').text('Çarpım: ' + carpim);
+            } else {
+                $('#sonuc').text('Geçerli sayılar giriniz.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
